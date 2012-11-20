@@ -1,0 +1,26 @@
+{
+  "name": "audioslice",
+  "version": "0.0.1",
+  "description": "nodejs + ffmpeg to slice audio file to small junks",
+  "main": "slice.js",
+  "dependencies": {
+    "async": "~0.1.22",
+    "underscore": "~1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hiitsu/audioslice.git"
+  },
+  "keywords": [
+    "audio",
+    "ffmpeg",
+    "slice"
+  ],
+  "author": "hiitsu",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}
