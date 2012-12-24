@@ -2,22 +2,27 @@ var exec = require('child_process').exec,
 	async = require('async')
 	_ = require('underscore');
 
-var a = _.range(10);
+var a = _.range(48);
 async.forEachSeries(a,function(b,done){
-	var from = ('00000'+b*5).slice(-2);
-	var duration = '02';
-	var output = b+'.wav';
-	var c = 'ffmpeg -ss 00:00:'+from+'.0 -t 00:00:'+duration+'.0 -i input.mp3 -y -ac 2 '+output;
+	var from = ('00000'+b).slice(-2);
+	var duration = '00.95';
+	//var output = 'n'+b+'.ogg';
+	//var c = 'ffmpeg -ss 00:00:'+from+'.0 -t 00:00:'+duration+' -i octaves.wav -y -acodec libvorbis '+output;
+	var wav = 'n'+b+'.wav',
+		ogg = 'n'+b+'.ogg';
+	var c = 'ffmpeg -ss 00:00:'+from+'.0 -t 00:00:'+duration+' -i octaves.wav -y '+wav;
 	console.log(c);
 	var child = exec(c,function (error, stdout, stderr) {
-		console.log(output+' done!');
-		//console.log('stdout: ' + stdout);
-		//console.log('stderr: ' + stderr);
-		if (error !== null) {
+		console.log(wav+' done!');
+		if( error ) {
 			console.log(output+' exec error: ' + error);
 		}
-		return done();
+		var d = 'ffmpeg -i '+wav +' -acodec libvorbis -y '+ogg;
+		var convert = exec(d,function(error) {
+			console.log(wav+' to '+ogg+' done!');
+			return done();
+		});
 	});
 },function() {
-	console.log('done!');
+	console.log('all done!');
 });
